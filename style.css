@@ -1,0 +1,232 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* App container for mobile responsiveness */
+.app-container {
+    width: 100%;
+    max-width: 400px; /* Max width for phone screens */
+    min-height: 100vh; /* Ensure it takes full height */
+    padding: 1rem 0.5rem; /* Responsive padding */
+}
+
+/* Header */
+header h1 {
+    font-size: 1.5rem; /* Adjusted for mobile */
+    color: #fff;
+    background-color: #333; /* Darker bar for the day */
+}
+
+/* Exercise Item */
+.exercise-item {
+    background-color: #1a1a1a; /* Dark gray for exercise cards */
+    margin-bottom: 0.8rem; /* Slightly smaller margin */
+    padding: 0.8rem; /* Slightly smaller padding */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border: 1px solid #444; /* Subtle border */
+}
+
+.exercise-header {
+    display: flex;
+    align-items: flex-start; /* Align items to the top for multi-line content */
+    justify-content: space-between;
+    margin-bottom: 0.5rem; /* Space between header and details */
+}
+
+.exercise-info {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+}
+
+.exercise-name {
+    font-weight: bold;
+    font-size: 1rem; /* Adjusted for mobile */
+    color: #fff;
+    line-height: 1.2; /* Better line spacing */
+}
+
+.exercise-type {
+    background-color: #555;
+    color: #fff;
+    padding: 0.2rem 0.5rem; /* Smaller padding */
+    border-radius: 0.25rem; /* Slightly smaller radius */
+    font-size: 0.75rem; /* Adjusted for mobile */
+    display: inline-block; /* Allows padding and background */
+    margin-top: 0.2rem; /* Space below name */
+}
+
+.exercise-sets-reps {
+    font-size: 0.85rem; /* Adjusted for mobile */
+    color: #bbb;
+    margin-top: 0.2rem; /* Align with type */
+    display: block; /* New line */
+}
+
+/* Checkbox */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; /* Slightly smaller */
+    height: 28px; /* Slightly smaller */
+    border: 2px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    flex-shrink: 0;
+    margin-left: 0.5rem; /* Space from text */
+}
+
+.checkbox-container.checked {
+    background-color: #0f0; /* Green when checked */
+    border-color: #0f0;
+}
+
+.checkbox-container.checked::before {
+    content: '\2713'; /* Tick mark */
+    color: #000;
+    font-size: 1.1rem; /* Slightly smaller tick */
+    font-weight: bold;
+}
+
+/* Dropdown Arrow */
+.dropdown-arrow {
+    font-size: 1.1rem; /* Adjusted for mobile */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 0.2rem; /* Make it easier to tap */
+    margin-left: 0.5rem; /* Space from checkbox */
+}
+
+.dropdown-arrow.rotated {
+    transform: rotate(90deg);
+}
+
+/* Exercise Details (Dropdown Content) */
+.exercise-details {
+    overflow: hidden;
+    max-height: 0; /* Hidden by default */
+    transition: max-height 0.3s ease-out;
+}
+
+.exercise-details.show {
+    max-height: 300px; /* Sufficient height for notes and image */
+    margin-top: 0.5rem; /* Space from header */
+}
+
+.exercise-details p.exercise-notes {
+    font-size: 0.8rem; /* Adjusted for mobile */
+    color: #999;
+    margin-bottom: 0.5rem; /* Space between notes and image */
+}
+
+.exercise-details img.exercise-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.25rem;
+    display: block; /* Ensure it takes full width */
+}
+
+/* Completed Section */
+#completed-section h2 {
+    font-size: 1.2rem; /* Adjusted for mobile */
+}
+
+.completed-exercise-item {
+    background-color: #222;
+    padding: 0.6rem; /* Smaller padding */
+    margin-bottom: 0.5rem; /* Smaller margin */
+    border-radius: 0.4rem;
+    font-size: 0.8rem; /* Adjusted for mobile */
+    color: #ccc;
+}
+
+.completed-exercise-item .reset-btn {
+    padding: 0.3rem 0.6rem; /* Smaller padding */
+    font-size: 0.7rem; /* Adjusted for mobile */
+}
+
+/* Motivation Text */
+.motivation-text {
+    font-size: 0.85rem; /* Adjusted for mobile */
+}
+
+/* Completion Message */
+.completion-message {
+    background-color: #008000; /* Green */
+    color: #fff;
+    padding: 1.5rem; /* Adjusted padding */
+    border-radius: 0.6rem;
+    font-size: 1.3rem; /* Adjusted for mobile */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    width: 90%; /* More responsive width */
+    max-width: 280px; /* Max width for message */
+    height: auto; /* Auto height based on content */
+}
+
+.completion-message .tick-icon {
+    font-size: 2.5rem; /* Smaller tick icon */
+    margin-bottom: 0.5rem;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    border-top: 1px solid #444;
+}
+
+.nav-button {
+    font-size: 0.9rem; /* Adjusted for mobile */
+    padding: 0.6rem 0.8rem; /* Adjusted padding */
+    transition: background-color 0.3s;
+    border-radius: 0.3rem; /* Rounded corners */
+}
+
+.nav-button:hover, .nav-button.active {
+    background-color: #555;
+    color: #fff; /* Ensure text color remains white */
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+.text-white { color: #fff !important; }
+.bg-dark-subtle { background-color: #333 !important; }
+.border-secondary { border-color: #444 !important; }
+.text-white-50 { color: rgba(255, 255, 255, 0.5) !important; }
+
+.strength {
+    background-color: #DC3545;
+    color: white;
+}
+
+.normal-set {
+    background-color: #007BFF;
+    color: white;
+}
+
+.superset {
+    background-color: #FD7E14;
+    color: white;
+}
+
+.finisher {
+    background-color: #6F42C1;
+    color: white;
+}
