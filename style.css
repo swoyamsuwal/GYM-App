@@ -67,7 +67,7 @@ header h1 {
 
 .exercise-sets-reps {
     font-size: 0.85rem; /* Adjusted for mobile */
-    color: #bbb;
+    color: #eeeeee;
     margin-top: 0.2rem; /* Align with type */
     display: block; /* New line */
 }

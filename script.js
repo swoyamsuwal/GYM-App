@@ -154,7 +154,6 @@ function loadWorkouts() {
                         <div class="exercise-type">Pre</div>
                         <div class="exercise-sets-reps"></div>
                     </div>
-                    <div class="checkbox-container" data-exercise-index="warmup" onclick="toggleExerciseCompletion(this)"></div>
                     <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
                 </div>
                 <div class="exercise-details">
