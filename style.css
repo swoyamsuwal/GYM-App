@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    margin-top: 30px; /* For Iphone noch */
+    margin-top: 10px; /* For Iphone noch */
     background-color: #000; /* Black background */
     color: #fff; /* White text */
     display: flex;
@@ -17,7 +17,6 @@ body {
     width: 100%;
     max-width: 400px; /* Max width for phone screens */
     min-height: 100vh; /* Ensure it takes full height */
-    padding: 1rem 0.5rem; /* Responsive padding */
 }
 
 /* Header */
@@ -30,11 +29,12 @@ header h1 {
 /* Exercise Item */
 .exercise-item {
     background-color: #1a1a1a; /* Dark gray for exercise cards */
-    margin-bottom: 0.8rem; /* Slightly smaller margin */
-    padding: 0.8rem; /* Slightly smaller padding */
+    margin: 1.1rem; /* Slightly smaller margin */
+    padding: 0.2rem; /* Slightly smaller padding */
     border-radius: 0.5rem; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    border: 1px solid #444; /* Subtle border */
+    /* Increased border thickness */
+    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333; /* First layer (light gray), then second layer (darker gray) - increased thickness */
+    border: none; /* Remove original border */
 }
 
 .exercise-header {
