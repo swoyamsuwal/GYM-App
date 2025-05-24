@@ -5,18 +5,24 @@ body {
     margin-top: 10px; /* For Iphone noch */
     background-color: #000; /* Black background */
     color: #fff; /* White text */
-    display: flex;
+    display: flex; /* ADDED */
+    flex-direction: column; /* ADDED */
     justify-content: center;
-    align-items: flex-start; /* Align to top */
+    align-items: center; /* CHANGED from flex-start to center */
     min-height: 100vh;
     box-sizing: border-box;
+    position: relative; /* ADDED */
 }
 
+/* App container for mobile responsiveness */
 /* App container for mobile responsiveness */
 .app-container {
     width: 100%;
     max-width: 400px; /* Max width for phone screens */
-    min-height: 100vh; /* Ensure it takes full height */
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-bottom: 70px;
+    background-color: #000; /* Ensure main background is black */
 }
 
 /* Header */
@@ -150,6 +156,7 @@ header h1 {
     border-radius: 0.4rem;
     font-size: 0.8rem; /* Adjusted for mobile */
     color: #ccc;
+    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333; /* First layer (light gray), then second layer (darker gray) */
 }
 
 .completed-exercise-item .reset-btn {
@@ -188,6 +195,14 @@ header h1 {
 /* Bottom Navigation */
 .bottom-nav {
     border-top: 1px solid #444;
+    position: fixed; /* ADDED */
+    bottom: 0; /* ADDED */
+    left: 0; /* ADDED */
+    right: 0; /* ADDED */
+    width: 100%; /* ADDED */
+    z-index: 1000; /* ADDED */
+    max-width: 400px; /* ADDED */
+    margin: 0 auto; /* ADDED */
 }
 
 .nav-button {
