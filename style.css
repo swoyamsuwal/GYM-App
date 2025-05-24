@@ -2,52 +2,47 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    margin-top: 10px; /* For Iphone noch */
-    background-color: #000; /* Black background */
-    color: #fff; /* White text */
-    display: flex; /* ADDED */
-    flex-direction: column; /* ADDED */
+    margin-top: 10px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center; /* CHANGED from flex-start to center */
+    align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
-    position: relative; /* ADDED */
+    position: relative;
 }
 
-/* App container for mobile responsiveness */
-/* App container for mobile responsiveness */
 .app-container {
     width: 100%;
-    max-width: 400px; /* Max width for phone screens */
+    max-width: 400px;
     flex-grow: 1;
     overflow-y: auto;
     padding-bottom: 70px;
-    background-color: #000; /* Ensure main background is black */
+    background-color: #000;
 }
 
-/* Header */
 header h1 {
-    font-size: 1.5rem; /* Adjusted for mobile */
+    font-size: 1.5rem;
     color: #fff;
-    background-color: #333; /* Darker bar for the day */
+    background-color: #333;
 }
 
-/* Exercise Item */
 .exercise-item {
-    background-color: #1a1a1a; /* Dark gray for exercise cards */
-    margin: 1.1rem; /* Slightly smaller margin */
-    padding: 0.2rem; /* Slightly smaller padding */
-    border-radius: 0.5rem; /* Rounded corners */
-    /* Increased border thickness */
-    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333; /* First layer (light gray), then second layer (darker gray) - increased thickness */
-    border: none; /* Remove original border */
+    background-color: #1a1a1a;
+    margin: 1.1rem;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333;
+    border: none;
 }
 
 .exercise-header {
     display: flex;
-    align-items: flex-start; /* Align items to the top for multi-line content */
+    align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 0.5rem; /* Space between header and details */
+    margin-bottom: 0.5rem;
 }
 
 .exercise-info {
@@ -57,195 +52,178 @@ header h1 {
 
 .exercise-name {
     font-weight: bold;
-    font-size: 1rem; /* Adjusted for mobile */
+    font-size: 1rem;
     color: #fff;
-    line-height: 1.2; /* Better line spacing */
+    line-height: 1.2;
 }
 
 .exercise-type {
     background-color: #555;
     color: #fff;
-    padding: 0.2rem 0.5rem; /* Smaller padding */
-    border-radius: 0.25rem; /* Slightly smaller radius */
-    font-size: 0.75rem; /* Adjusted for mobile */
-    display: inline-block; /* Allows padding and background */
-    margin-top: 0.2rem; /* Space below name */
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    display: inline-block;
+    margin-top: 0.2rem;
 }
 
 .exercise-sets-reps {
-    font-size: 0.85rem; /* Adjusted for mobile */
+    font-size: 0.85rem;
     color: #eeeeee;
-    margin-top: 0.2rem; /* Align with type */
-    display: block; /* New line */
+    margin-top: 0.2rem;
+    display: block;
 }
 
-/* Checkbox */
-.checkbox-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px; /* Slightly smaller */
-    height: 28px; /* Slightly smaller */
-    border: 2px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s;
-    flex-shrink: 0;
-    margin-left: 0.5rem; /* Space from text */
-}
-
-.checkbox-container.checked {
-    background-color: #0f0; /* Green when checked */
-    border-color: #0f0;
-}
-
-.checkbox-container.checked::before {
-    content: '\2713'; /* Tick mark */
-    color: #000;
-    font-size: 1.1rem; /* Slightly smaller tick */
-    font-weight: bold;
-}
-
-/* Dropdown Arrow */
 .dropdown-arrow {
-    font-size: 1.1rem; /* Adjusted for mobile */
+    font-size: 1.1rem;
     cursor: pointer;
     transition: transform 0.3s ease;
-    padding: 0.2rem; /* Make it easier to tap */
-    margin-left: 0.5rem; /* Space from checkbox */
+    padding: 0.2rem;
+    margin-left: 0.5rem;
 }
 
 .dropdown-arrow.rotated {
     transform: rotate(90deg);
 }
 
-/* Exercise Details (Dropdown Content) */
 .exercise-details {
     overflow: hidden;
-    max-height: 0; /* Hidden by default */
+    max-height: 0;
     transition: max-height 0.3s ease-out;
 }
 
 .exercise-details.show {
-    max-height: 300px; /* Sufficient height for notes and image */
-    margin-top: 0.5rem; /* Space from header */
+    max-height: 300px;
+    margin-top: 0.5rem;
 }
 
 .exercise-details p.exercise-notes {
-    font-size: 0.8rem; /* Adjusted for mobile */
+    font-size: 0.8rem;
     color: #999;
-    margin-bottom: 0.5rem; /* Space between notes and image */
+    margin-bottom: 0.5rem;
 }
 
 .exercise-details img.exercise-image {
     width: 100%;
     height: auto;
     border-radius: 0.25rem;
-    display: block; /* Ensure it takes full width */
+    display: block;
 }
 
-/* Completed Section */
 #completed-section h2 {
-    font-size: 1.2rem; /* Adjusted for mobile */
+    font-size: 1.2rem;
 }
 
 .completed-exercise-item {
     background-color: #222;
-    padding: 0.6rem; /* Smaller padding */
-    margin-bottom: 0.5rem; /* Smaller margin */
+    padding: 0.6rem;
+    margin-bottom: 0.5rem;
     border-radius: 0.4rem;
-    font-size: 0.8rem; /* Adjusted for mobile */
+    font-size: 0.8rem;
     color: #ccc;
-    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333; /* First layer (light gray), then second layer (darker gray) */
+    box-shadow: 0 0 0 3px #555, 0 0 0 6px #333;
 }
 
 .completed-exercise-item .reset-btn {
-    padding: 0.3rem 0.6rem; /* Smaller padding */
-    font-size: 0.7rem; /* Adjusted for mobile */
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    background-color: #dc3545; /* Bootstrap red */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
 }
 
-/* Motivation Text */
+.completed-exercise-item .reset-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+
 .motivation-text {
-    font-size: 0.85rem; /* Adjusted for mobile */
+    font-size: 0.85rem;
 }
 
-/* Completion Message */
 .completion-message {
-    background-color: #008000; /* Green */
+    background-color: #008000;
     color: #fff;
-    padding: 1.5rem; /* Adjusted padding */
+    padding: 1.5rem;
     border-radius: 0.6rem;
-    font-size: 1.3rem; /* Adjusted for mobile */
+    font-size: 1.3rem;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
     box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-    width: 90%; /* More responsive width */
-    max-width: 280px; /* Max width for message */
-    height: auto; /* Auto height based on content */
+    width: 90%;
+    max-width: 280px;
+    height: auto;
 }
 
 .completion-message .tick-icon {
-    font-size: 2.5rem; /* Smaller tick icon */
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
 }
 
-/* Bottom Navigation */
 .bottom-nav {
     border-top: 1px solid #444;
-    position: fixed; /* ADDED */
-    bottom: 0; /* ADDED */
-    left: 0; /* ADDED */
-    right: 0; /* ADDED */
-    width: 100%; /* ADDED */
-    z-index: 1000; /* ADDED */
-    max-width: 400px; /* ADDED */
-    margin: 0 auto; /* ADDED */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .nav-button {
-    font-size: 0.9rem; /* Adjusted for mobile */
-    padding: 0.6rem 0.8rem; /* Adjusted padding */
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
     transition: background-color 0.3s;
-    border-radius: 0.3rem; /* Rounded corners */
+    border-radius: 0.3rem;
 }
 
-.nav-button:hover, .nav-button.active {
+.nav-button:hover,
+.nav-button.active {
     background-color: #555;
-    color: #fff; /* Ensure text color remains white */
+    color: #fff;
 }
 
-/* Utility */
 .hidden {
     display: none !important;
 }
 
-.text-white { color: #fff !important; }
-.bg-dark-subtle { background-color: #333 !important; }
-.border-secondary { border-color: #444 !important; }
-.text-white-50 { color: rgba(255, 255, 255, 0.5) !important; }
+.text-white {
+    color: #fff !important;
+}
+.bg-dark-subtle {
+    background-color: #333 !important;
+}
+.border-secondary {
+    border-color: #444 !important;
+}
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
 
 .strength {
     background-color: #DC3545;
     color: white;
 }
-
 .normal-set {
     background-color: #007BFF;
     color: white;
 }
-
 .superset {
     background-color: #FD7E14;
     color: white;
 }
-
 .finisher {
     background-color: #6F42C1;
     color: white;
 }
+
 /* Custom Modal Overlay */
 .custom-modal-overlay {
     position: fixed;
@@ -253,16 +231,15 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Higher than other elements */
+    z-index: 2000;
 }
 
-/* Custom Modal Content */
 .custom-modal-content {
-    background-color: #1a1a1a; /* Dark background like exercise cards */
+    background-color: #1a1a1a;
     color: #fff;
     padding: 25px;
     border-radius: 10px;
@@ -270,7 +247,7 @@ header h1 {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     max-width: 300px;
     width: 90%;
-    border: 2px solid #555; /* Light gray border */
+    border: 2px solid #555;
 }
 
 .custom-modal-content p {
@@ -290,19 +267,93 @@ header h1 {
 }
 
 .modal-buttons .btn-success {
-    background-color: #28a745; /* Green for Yes */
+    background-color: #28a745;
     color: white;
 }
-
 .modal-buttons .btn-danger {
-    background-color: #dc3545; /* Red for No */
+    background-color: #dc3545;
     color: white;
 }
-
 .modal-buttons .btn-success:hover {
     background-color: #218838;
 }
-
 .modal-buttons .btn-danger:hover {
     background-color: #c82333;
+}
+
+/* Slider Popup (Final Design) */
+.slider-popup {
+    position: fixed;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 2000;
+    pointer-events: none;
+}
+
+.slider-popup-inner {
+    background-color: #1a1a1a;
+    border: 2px solid #28a745;
+    border-radius: 10px;
+    padding: 15px;
+    width: 90%;
+    max-width: 360px;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    text-align: center;
+    pointer-events: auto;
+}
+
+.slider-workout-name {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.slider-box {
+    background-color: #000;
+    border: 2px solid #28a745;
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 8px rgba(40, 167, 69, 0.3);
+}
+
+.custom-slider-container {
+    position: relative;
+    width: 100%;
+}
+
+#completeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 14px;
+    border-radius: 6px;
+    background: #444;
+    outline: none;
+}
+
+/* Thumb with white arrow */
+#completeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 42px;
+    height: 42px;
+    background-color: #28a745;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px #28a745;
+}
+
+#completeSlider::-webkit-slider-thumb::before {
+    content: '\2192'; /* white arrow */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
 }

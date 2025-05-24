@@ -175,7 +175,7 @@ function loadWorkouts() {
                             <div class="exercise-type ${getCssClassFromType(exercise.type)}">${exercise.type}</div>
                             <div class="exercise-sets-reps">${exercise.setsReps}</div>
                         </div>
-                        <div class="checkbox-container ${isCompleted ? 'checked' : ''}" data-exercise-index="exercise-${index}" onclick="toggleExerciseCompletion(this)"></div>
+                        <button class="btn btn-success btn-sm" onclick="showSliderPopup('exercise-${index}')">Start</button>
                         <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
                     </div>
                     <div class="exercise-details">
@@ -325,3 +325,36 @@ function showHomePage() {
     // In this static app, showHomePage just reloads the current day's workouts
     loadWorkouts();
 }
+let sliderExerciseId = null;
+
+function showSliderPopup(exerciseId) {
+  sliderExerciseId = exerciseId;
+
+  const card = document.getElementById(exerciseId);
+  const workoutName = card?.querySelector('.exercise-name')?.textContent || 'Workout';
+  document.getElementById('sliderWorkoutName').textContent = workoutName;
+
+  const slider = document.getElementById('completeSlider');
+  slider.value = 0;
+
+  document.getElementById('sliderPopup').classList.remove('hidden');
+}
+
+const slider = document.getElementById('completeSlider');
+
+slider.addEventListener('change', function () {
+  if (this.value >= 100 && sliderExerciseId) {
+    if (!completedExercises[currentDay]) {
+      completedExercises[currentDay] = {};
+    }
+    completedExercises[currentDay][sliderExerciseId] = true;
+    localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+    loadWorkouts();
+    updateMotivationText();
+    checkAllWorkoutsCompleted();
+    document.getElementById('sliderPopup').classList.add('hidden');
+  } else {
+    // Snap back if not completed
+    this.value = 0;
+  }
+});
