@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const workoutData = {
-    "Saturday": {
+    "Sunday": {
         "dayName": "Rest Day",
         "warmup": "Fully rest and recover. Stretch lightly or do gentle mobility work if desired. Good sleep and nutrition help retain strength and support fat loss.",
         "exercises": []
     },
-    "Sunday": {
+    "Saturday": {
         "dayName": "Chest & Back",
         "warmup": `
             <p>Jumping jacks or light jump rope – raise heart rate.</p>
