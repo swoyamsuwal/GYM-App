@@ -56,6 +56,28 @@ header h1 {
     color: #fff;
     line-height: 1.2;
 }
+.start-square-button {
+    width: 60px;
+    height: 60px;
+    background-color: #28a745;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.start-square-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
 
 .exercise-type {
     background-color: #555;

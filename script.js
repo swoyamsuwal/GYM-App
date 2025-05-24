@@ -175,7 +175,7 @@ function loadWorkouts() {
                             <div class="exercise-type ${getCssClassFromType(exercise.type)}">${exercise.type}</div>
                             <div class="exercise-sets-reps">${exercise.setsReps}</div>
                         </div>
-                        <button class="btn btn-success btn-sm" onclick="showSliderPopup('exercise-${index}')">Start</button>
+                        <button class="start-square-button" onclick="showSliderPopup('exercise-${index}')">Start</button>
                         <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
                     </div>
                     <div class="exercise-details">
