@@ -246,3 +246,63 @@ header h1 {
     background-color: #6F42C1;
     color: white;
 }
+/* Custom Modal Overlay */
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Higher than other elements */
+}
+
+/* Custom Modal Content */
+.custom-modal-content {
+    background-color: #1a1a1a; /* Dark background like exercise cards */
+    color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    max-width: 300px;
+    width: 90%;
+    border: 2px solid #555; /* Light gray border */
+}
+
+.custom-modal-content p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.modal-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.modal-buttons .btn-success {
+    background-color: #28a745; /* Green for Yes */
+    color: white;
+}
+
+.modal-buttons .btn-danger {
+    background-color: #dc3545; /* Red for No */
+    color: white;
+}
+
+.modal-buttons .btn-success:hover {
+    background-color: #218838;
+}
+
+.modal-buttons .btn-danger:hover {
+    background-color: #c82333;
+}

@@ -290,16 +290,36 @@ function resetCompletedIndividual() {
     }
 }
 
-function refreshWorkouts() {
-    if (confirm("Are you sure you want to refresh all exercises and set them to default (uncompleted) state for today?")) {
-        completedExercises = {}; // Clear ALL completed exercises (for simplicity in "Refresh All")
-        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-        // You might want to make this only clear currentDay similar to resetCompletedIndividual
-        // If so, change `completedExercises = {};` to `completedExercises[currentDay] = {};`
-        // and adapt localStorage logic. For a "refresh all" button, clearing all is more intuitive.
-        loadWorkouts();
-    }
+// Function to show the custom confirmation modal
+function showRefreshConfirmModal() {
+    document.getElementById('refreshConfirmModal').classList.remove('hidden');
 }
+
+// Function to hide the custom confirmation modal
+function hideRefreshConfirmModal() {
+    document.getElementById('refreshConfirmModal').classList.add('hidden');
+}
+
+// Original refreshWorkouts function, now simplified to trigger the modal
+function refreshWorkouts() {
+    showRefreshConfirmModal();
+}
+
+// Add event listeners for the Yes and No buttons in the modal
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing DOMContentLoaded code ...
+
+    document.getElementById('confirmRefreshYes').addEventListener('click', () => {
+        completedExercises = {}; // Clear ALL completed exercises
+        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+        loadWorkouts();
+        hideRefreshConfirmModal(); // Hide the modal after confirmation
+    });
+
+    document.getElementById('confirmRefreshNo').addEventListener('click', () => {
+        hideRefreshConfirmModal(); // Just hide the modal if 'No' is clicked
+    });
+});
 
 function showHomePage() {
     // In this static app, showHomePage just reloads the current day's workouts
