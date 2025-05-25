@@ -19,26 +19,31 @@ body {
     max-width: 400px;
     flex-grow: 1;
     overflow-y: auto;
-    padding-bottom: 70px;
+    padding-bottom: 70px; /* Ensure space for bottom nav and slider popup */
     background-color: #000;
 }
 
 header h1 {
     font-size: 1.5rem;
     color: #fff;
-    background-color: #333;
+    background-color: #333; /* Using existing variable if defined, or direct value */
 }
 
 .exercise-item {
     background-color: #1a1a1a;
     margin: 1.1rem;
-    padding: 0.2rem;
+    padding: 0.2rem; /* Or adjust as needed if card-body provides padding */
     border-radius: 0.5rem;
     box-shadow: 0 0 0 3px #555, 0 0 0 6px #333;
-    border: none;
+    border: none; /* Explicitly no border for the item itself if card-body handles it */
 }
 
-.exercise-header {
+.exercise-item .card-body { /* Ensure card-body padding is sufficient */
+    padding: 0.8rem; /* Example padding for card-body */
+}
+
+
+.exercise-header { /* This class might be obsolete if using card-body structure directly */
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -71,6 +76,7 @@ header h1 {
     box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
     transition: background-color 0.3s ease, transform 0.1s ease;
     cursor: pointer;
+    flex-shrink: 0; /* Prevents button from shrinking if info text is long */
 }
 
 .start-square-button:hover {
@@ -101,7 +107,8 @@ header h1 {
     cursor: pointer;
     transition: transform 0.3s ease;
     padding: 0.2rem;
-    margin-left: 0.5rem;
+    margin-left: 0.5rem; /* Keep margin from button if button is present */
+    align-self: center; /* Align arrow vertically in the flex container */
 }
 
 .dropdown-arrow.rotated {
@@ -112,24 +119,45 @@ header h1 {
     overflow: hidden;
     max-height: 0;
     transition: max-height 0.3s ease-out;
+    margin-top: 0.5rem; /* Add margin when details are shown */
 }
 
 .exercise-details.show {
-    max-height: 300px;
-    margin-top: 0.5rem;
+    max-height: 500px; /* Increased max-height for potentially longer superset details */
+    /* margin-top is already set above */
 }
 
-.exercise-details p.exercise-notes {
+/* Changed p.exercise-notes to div.exercise-notes */
+.exercise-details div.exercise-notes {
     font-size: 0.8rem;
-    color: #999;
+    color: #ccc; /* Lighter gray for all notes */
     margin-bottom: 0.5rem;
 }
+
+/* Styles for <p> tags specifically within div.exercise-notes (e.g., from warmup data) */
+.exercise-details div.exercise-notes p {
+    color: #ccc; /* Ensure paragraphs within notes also use the lighter gray */
+    margin-top: 0;
+    margin-bottom: 0.4em; /* Space between paragraphs inside notes */
+}
+.exercise-details div.exercise-notes p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Specific styling for warm-up notes to ensure visibility */
+.warm-up .exercise-details div.exercise-notes,
+.warm-up .exercise-details div.exercise-notes p {
+    color: #f0f0f0; /* Even lighter color for warm-up text */
+}
+
 
 .exercise-details img.exercise-image {
     width: 100%;
     height: auto;
     border-radius: 0.25rem;
     display: block;
+    margin-top: 0.5rem; /* Space above image */
 }
 
 #completed-section h2 {
@@ -161,12 +189,13 @@ header h1 {
 }
 
 
-.motivation-text {
+.motivation-text { /* Renamed from #motivation-text for consistency if it's a class */
     font-size: 0.85rem;
+    /* text-align: center; fst-italic text-white-50 are bootstrap classes in HTML */
 }
 
 .completion-message {
-    background-color: #008000;
+    background-color: #008000; /* Darker green for better contrast with white text potentially */
     color: #fff;
     padding: 1.5rem;
     border-radius: 0.6rem;
@@ -176,27 +205,29 @@ header h1 {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 128, 0, 0.5); /* Adjusted shadow to match new green */
     width: 90%;
     max-width: 280px;
     height: auto;
+    text-align: center; /* Center text and icon */
 }
 
 .completion-message .tick-icon {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    display: block; /* Ensure it's block for centering */
 }
 
 .bottom-nav {
     border-top: 1px solid #444;
     position: fixed;
     bottom: 0;
-    left: 0;
-    right: 0;
+    left: 50%; /* Center the nav */
+    transform: translateX(-50%); /* دقیقاً در مرکز قرار دادن */
     width: 100%;
+    max-width: 400px; /* Match app-container max-width */
     z-index: 1000;
-    max-width: 400px;
-    margin: 0 auto;
+    /* background-color is set by bootstrap bg-dark-subtle */
 }
 
 .nav-button {
@@ -204,6 +235,7 @@ header h1 {
     padding: 0.6rem 0.8rem;
     transition: background-color 0.3s;
     border-radius: 0.3rem;
+    /* color is set by bootstrap text-white */
 }
 
 .nav-button:hover,
@@ -216,18 +248,7 @@ header h1 {
     display: none !important;
 }
 
-.text-white {
-    color: #fff !important;
-}
-.bg-dark-subtle {
-    background-color: #333 !important;
-}
-.border-secondary {
-    border-color: #444 !important;
-}
-.text-white-50 {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
+/* Bootstrap utility classes are used in HTML, so no need to redefine text-white etc. here unless overriding */
 
 .strength {
     background-color: #DC3545;
@@ -245,6 +266,11 @@ header h1 {
     background-color: #6F42C1;
     color: white;
 }
+.warm-up .exercise-type { /* Style for "Pre" type in warm-up */
+    background-color: #17A2B8; /* Teal/Info color for warm-up type */
+    color: white;
+}
+
 
 /* Custom Modal Overlay */
 .custom-modal-overlay {
@@ -257,7 +283,7 @@ header h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 2000; /* Ensure modal is on top */
 }
 
 .custom-modal-content {
@@ -306,40 +332,45 @@ header h1 {
 /* Slider Popup (Final Design) */
 .slider-popup {
     position: fixed;
-    bottom: 80px;
-    left: 0;
-    right: 0;
+    bottom: 70px; /* Adjusted to be above the bottom nav */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 400px; /* Match app container */
     display: flex;
     justify-content: center;
-    z-index: 2000;
-    pointer-events: none;
+    z-index: 1500; /* Above content, below modal */
+    pointer-events: none; /* Allow clicks through overlay unless on inner */
+    padding: 0 10px; /* Add some padding so inner doesn't touch edges */
+    box-sizing: border-box;
 }
 
 .slider-popup-inner {
-    background-color: #1a1a1a;
+    background-color: #1e1e1e; /* Slightly different from card background */
     border: 2px solid #28a745;
-    border-radius: 10px;
-    padding: 15px;
-    width: 90%;
-    max-width: 360px;
-    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+    border-radius: 12px; /* Softer radius */
+    padding: 15px 20px; /* More padding */
+    width: 100%; 
+    max-width: 370px; /* Ensure it fits within the 400px max-width with padding */
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.6);
     text-align: center;
-    pointer-events: auto;
+    pointer-events: auto; /* Enable events for the popup itself */
+    box-sizing: border-box;
 }
 
 .slider-workout-name {
     color: #fff;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px; /* More space */
     font-size: 1rem;
 }
 
 .slider-box {
     background-color: #000;
-    border: 2px solid #28a745;
-    padding: 14px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 8px rgba(40, 167, 69, 0.3);
+    border: 1px solid #28a745; /* Thinner border */
+    padding: 12px; /* Adjust padding */
+    border-radius: 8px; /* Softer radius */
+    box-shadow: inset 0 0 6px rgba(40, 167, 69, 0.2); /* Softer inset shadow */
 }
 
 .custom-slider-container {
@@ -351,31 +382,53 @@ header h1 {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 14px;
+    height: 12px; /* Slightly thinner */
     border-radius: 6px;
-    background: #444;
+    background: #444; /* Darker track */
     outline: none;
+    cursor: pointer; /* Make the track also look clickable */
 }
 
-/* Thumb with white arrow */
 #completeSlider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 42px;
-    height: 42px;
+    width: 38px; /* Slightly smaller thumb */
+    height: 38px;
     background-color: #28a745;
     border-radius: 50%;
     cursor: pointer;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 5px #28a745;
+    position: relative; /* For pseudo-elements if needed */
+    /* No explicit flex needed here, pseudo-element handles arrow */
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.7); /* Enhance shadow */
+    transition: transform 0.1s ease-out; /* Thumb animation on press */
+}
+#completeSlider::-moz-range-thumb { /* Firefox */
+    width: 38px;
+    height: 38px;
+    background-color: #28a745;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none; /* Remove Firefox default border */
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.7);
 }
 
+
+/* Arrow on thumb - using a pseudo-element */
 #completeSlider::-webkit-slider-thumb::before {
-    content: '\2192'; /* white arrow */
+    content: '\27A4'; /* Heavy Rightwards Arrow or \2192 (Right Arrow) or FontAwesome icon */
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem; /* Adjust size */
     font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/* For Firefox, styling thumb content is harder; often requires SVG or complex tricks.
+   A simple thumb is more cross-browser compatible if complex content isn't essential.
+   The current ::before will only work on WebKit. For a universal approach,
+   the thumb itself would just be the green circle. */
+
+#completeSlider:active::-webkit-slider-thumb {
+    transform: scale(1.1); /* Slightly enlarge thumb on drag */
 }

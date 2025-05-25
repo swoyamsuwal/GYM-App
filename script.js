@@ -1,6 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadWorkouts();
     updateDayOfExercise();
+    // Add event listeners for the Yes and No buttons in the refresh modal
+    document.getElementById('confirmRefreshYes').addEventListener('click', () => {
+        completedExercises = {}; // Clear ALL completed exercises
+        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+        // Reset currentDay to ensure it's fresh if it was changed by other logic (if any)
+        currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
+        updateDayOfExercise(); // Update the displayed day name
+        loadWorkouts();
+        hideRefreshConfirmModal(); // Hide the modal after confirmation
+    });
+
+    document.getElementById('confirmRefreshNo').addEventListener('click', () => {
+        hideRefreshConfirmModal(); // Just hide the modal if 'No' is clicked
+    });
+
+    // Slider event listener
+    const completeSlider = document.getElementById('completeSlider');
+    completeSlider.addEventListener('input', function () { // Use 'input' for smoother UI update if needed, 'change' for final value
+      // Visual feedback while sliding can be added here if desired
+    });
+
+    completeSlider.addEventListener('change', function () {
+        if (this.value >= 100 && sliderExerciseId) { // sliderExerciseId is the displayId
+            if (!completedExercises[currentDay]) {
+                completedExercises[currentDay] = {};
+            }
+
+            sliderActualExerciseIds.forEach(id => {
+                completedExercises[currentDay][id] = true;
+            });
+
+            localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+            loadWorkouts();
+            updateMotivationText();
+            checkAllWorkoutsCompleted();
+            document.getElementById('sliderPopup').classList.add('hidden');
+            
+            // Reset slider state variables
+            sliderExerciseId = null;
+            sliderIsSuperset = false;
+            sliderActualExerciseIds = [];
+            this.value = 0; // Reset slider position
+        } else if (this.value < 100) {
+            // Snap back if not dragged to 100%
+            this.value = 0;
+        }
+    });
 });
 
 const workoutData = {
@@ -104,19 +151,26 @@ const workoutData = {
 let currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
 let completedExercises = JSON.parse(localStorage.getItem('completedExercises')) || {};
 
+// Variables for slider state
+let sliderExerciseId = null; // ID of the DOM element being interacted with (e.g., 'superset-display-0' or 'exercise-2')
+let sliderIsSuperset = false;
+let sliderActualExerciseIds = []; // Actual IDs for marking completion (e.g., ['exercise-0', 'exercise-1'] or ['exercise-2'])
+
+
 function updateDayOfExercise() {
     const currentWorkoutDayElement = document.getElementById('current-workout-day');
     const todayWorkout = workoutData[currentDay];
     if (todayWorkout) {
         currentWorkoutDayElement.textContent = `${todayWorkout.dayName}`;
     } else {
+        // Fallback if currentDay isn't in workoutData (should not happen with Date())
         currentWorkoutDayElement.textContent = `Today: Rest Day`;
     }
 }
 
 function getCssClassFromType(type) {
     if (!type) return '';
-    return type.toLowerCase().replace(/\s+/g, '-'); // Converts "Normal Set" → "normal-set"
+    return type.toLowerCase().replace(/\s+/g, '-');
 }
 
 function loadWorkouts() {
@@ -138,9 +192,10 @@ function loadWorkouts() {
                 </div>
             </div>
             <div class="exercise-details show">
-                <p class="exercise-notes">${todayWorkout?.warmup || 'No specific workout planned for today. Focus on recovery.'}</p>
+                <div class="exercise-notes">${todayWorkout?.warmup || 'No specific workout planned for today. Focus on recovery.'}</div>
             </div>
         </div>`;
+        updateMotivationText(); // Update motivation even for rest/no workout days
         return;
     }
 
@@ -157,48 +212,100 @@ function loadWorkouts() {
                     <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
                 </div>
                 <div class="exercise-details">
-                    <p class="exercise-notes">${todayWorkout.warmup}</p>
+                    <div class="exercise-notes">${todayWorkout.warmup}</div>
                     <img src="" alt="Warm-up illustration" class="exercise-image hidden">
                 </div>
             </div>
         </div>
     `;
 
-    todayWorkout.exercises.forEach((exercise, index) => {
-        const isCompleted = completedExercises[currentDay] && completedExercises[currentDay][`exercise-${index}`];
-        const exerciseHtml = `
-            <div class="card exercise-item" id="exercise-${index}">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="exercise-info">
-                            <div class="exercise-name">${exercise.name}</div>
-                            <div class="exercise-type ${getCssClassFromType(exercise.type)}">${exercise.type}</div>
-                            <div class="exercise-sets-reps">${exercise.setsReps}</div>
+    let exerciseHtmlList = [];
+    let completedExerciseHtmlList = [];
+    let i = 0;
+    while (i < todayWorkout.exercises.length) {
+        const exercise1 = todayWorkout.exercises[i];
+
+        if (exercise1.type === "Superset" && i + 1 < todayWorkout.exercises.length && todayWorkout.exercises[i+1].type === "Superset") {
+            const exercise2 = todayWorkout.exercises[i+1];
+            const supersetDisplayId = `superset-display-${i}`; // Unique ID for the superset card in the DOM
+            const exerciseId1 = `exercise-${i}`; // Actual ID for exercise 1 for completion tracking
+            const exerciseId2 = `exercise-${i+1}`; // Actual ID for exercise 2 for completion tracking
+
+            const isCompleted1 = completedExercises[currentDay] && completedExercises[currentDay][exerciseId1];
+            const isCompleted2 = completedExercises[currentDay] && completedExercises[currentDay][exerciseId2];
+            const isPairCompleted = isCompleted1 && isCompleted2;
+
+            if (isPairCompleted) {
+                completedExerciseHtmlList.push(`
+                    <div class="completed-exercise-item d-flex justify-content-between align-items-center">
+                        <span>${exercise1.name} & ${exercise2.name} (Superset)</span>
+                        <button class="btn btn-sm reset-btn" data-exercise-ids='["${exerciseId1}", "${exerciseId2}"]' onclick="uncompleteSuperset(this)">Uncomplete</button>
+                    </div>`);
+            } else {
+                exerciseHtmlList.push(`
+                <div class="card exercise-item" id="${supersetDisplayId}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="exercise-info">
+                                <div class="exercise-name">${exercise1.name} & ${exercise2.name}</div>
+                                <div class="exercise-type ${getCssClassFromType(exercise1.type)}">Superset</div>
+                                <div class="exercise-sets-reps">${exercise1.setsReps} / ${exercise2.setsReps}</div>
+                            </div>
+                            <button class="start-square-button" onclick="showSliderPopup('${supersetDisplayId}', true, ['${exerciseId1}', '${exerciseId2}'])">Start</button>
+                            <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
                         </div>
-                        <button class="start-square-button" onclick="showSliderPopup('exercise-${index}')">Start</button>
-                        <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
-                    </div>
-                    <div class="exercise-details">
-                        <p class="exercise-notes">${exercise.notes}</p>
-                        <img src="${exercise.imageUrl}" alt="${exercise.name} image" class="exercise-image ${exercise.imageUrl ? '' : 'hidden'}">
+                        <div class="exercise-details">
+                            <div class="exercise-notes"><strong>${exercise1.name}:</strong> ${exercise1.notes}</div>
+                            <img src="${exercise1.imageUrl}" alt="${exercise1.name} image" class="exercise-image ${exercise1.imageUrl ? '' : 'hidden'}">
+                            <hr class="my-2" style="border-top: 1px solid #444;">
+                            <div class="exercise-notes"><strong>${exercise2.name}:</strong> ${exercise2.notes}</div>
+                            <img src="${exercise2.imageUrl}" alt="${exercise2.name} image" class="exercise-image ${exercise2.imageUrl ? '' : 'hidden'}">
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-
-
-        if (isCompleted) {
-            completedWorkoutList.innerHTML += `
-                <div class="completed-exercise-item d-flex justify-content-between align-items-center">
-                    <span>${exercise.name} (${exercise.type})</span>
-                    <button class="btn btn-sm reset-btn" data-exercise-index="exercise-${index}" onclick="uncompleteIndividual(this)">Uncomplete</button>
-                </div>`;
+                `);
+            }
+            i += 2; // Consumed two exercises
         } else {
-            workoutList.innerHTML += exerciseHtml;
-        }
-    });
+            // Handle single exercise
+            const exerciseId = `exercise-${i}`; // Actual ID for completion tracking and DOM ID
+            const isCompleted = completedExercises[currentDay] && completedExercises[currentDay][exerciseId];
 
-    if (Object.keys(completedExercises[currentDay] || {}).length > 0) {
+            if (isCompleted) {
+                completedExerciseHtmlList.push(`
+                    <div class="completed-exercise-item d-flex justify-content-between align-items-center">
+                        <span>${exercise1.name} (${exercise1.type})</span>
+                        <button class="btn btn-sm reset-btn" data-exercise-index="${exerciseId}" onclick="uncompleteIndividual(this)">Uncomplete</button>
+                    </div>`);
+            } else {
+                exerciseHtmlList.push(`
+                <div class="card exercise-item" id="${exerciseId}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="exercise-info">
+                                <div class="exercise-name">${exercise1.name}</div>
+                                <div class="exercise-type ${getCssClassFromType(exercise1.type)}">${exercise1.type}</div>
+                                <div class="exercise-sets-reps">${exercise1.setsReps}</div>
+                            </div>
+                            <button class="start-square-button" onclick="showSliderPopup('${exerciseId}', false, ['${exerciseId}'])">Start</button>
+                            <span class="dropdown-arrow ms-2" onclick="toggleDetails(this)">&#9654;</span>
+                        </div>
+                        <div class="exercise-details">
+                            <div class="exercise-notes">${exercise1.notes}</div>
+                            <img src="${exercise1.imageUrl}" alt="${exercise1.name} image" class="exercise-image ${exercise1.imageUrl ? '' : 'hidden'}">
+                        </div>
+                    </div>
+                </div>
+                `);
+            }
+            i += 1; // Consumed one exercise
+        }
+    }
+
+    workoutList.innerHTML += exerciseHtmlList.join('');
+    completedWorkoutList.innerHTML += completedExerciseHtmlList.join('');
+
+    if (completedExerciseHtmlList.length > 0) {
         document.getElementById('completed-section').classList.remove('hidden');
     }
 
@@ -214,147 +321,125 @@ function toggleDetails(arrowElement) {
     details.classList.toggle('show');
 }
 
-function toggleExerciseCompletion(checkboxContainer) {
-    const exerciseItem = checkboxContainer.closest('.exercise-item');
-    const exerciseId = checkboxContainer.dataset.exerciseIndex;
-
-    if (!completedExercises[currentDay]) {
-        completedExercises[currentDay] = {};
-    }
-
-    if (checkboxContainer.classList.contains('checked')) {
-        // Unmark as completed from main list
-        checkboxContainer.classList.remove('checked');
-        delete completedExercises[currentDay][exerciseId];
-    } else {
-        // Mark as completed
-        checkboxContainer.classList.add('checked');
-        completedExercises[currentDay][exerciseId] = true;
-    }
-
-    localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-    loadWorkouts(); // Reload to move completed exercises to the bottom section
-    updateMotivationText();
-    checkAllWorkoutsCompleted();
-}
-
 function uncompleteIndividual(buttonElement) {
     const exerciseId = buttonElement.dataset.exerciseIndex;
     if (completedExercises[currentDay] && completedExercises[currentDay][exerciseId]) {
         delete completedExercises[currentDay][exerciseId];
         localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-        loadWorkouts(); // Reload to move it back
+        loadWorkouts();
+    }
+}
+
+function uncompleteSuperset(buttonElement) {
+    const exerciseIdsStr = buttonElement.dataset.exerciseIds;
+    try {
+        const exerciseIds = JSON.parse(exerciseIdsStr); // Parses string like '["exercise-0", "exercise-1"]'
+
+        if (completedExercises[currentDay] && Array.isArray(exerciseIds)) {
+            exerciseIds.forEach(id => {
+                if (completedExercises[currentDay][id]) {
+                    delete completedExercises[currentDay][id];
+                }
+            });
+            localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+            loadWorkouts(); 
+        }
+    } catch (e) {
+        console.error("Error parsing exercise IDs for uncompleting superset:", e);
     }
 }
 
 
 function updateMotivationText() {
     const motivationTextElement = document.getElementById('motivation-text');
-    const totalExercises = (workoutData[currentDay]?.exercises?.length || 0) + (workoutData[currentDay]?.warmup ? 1 : 0);
+    const todayWorkout = workoutData[currentDay];
+
+    if (!todayWorkout || todayWorkout.exercises.length === 0) {
+        motivationTextElement.textContent = "It's a rest day! Enjoy your recovery.";
+        return;
+    }
+    
+    const totalCompletableExercises = todayWorkout.exercises.length;
     const completedCount = Object.keys(completedExercises[currentDay] || {}).length;
 
-    if (totalExercises === 0) {
-        motivationTextElement.textContent = "It's a rest day! Enjoy your recovery.";
+    if (totalCompletableExercises === 0) { // Should be covered by the first check, but good as a fallback
+        motivationTextElement.textContent = "No exercises planned for today.";
         return;
     }
 
     if (completedCount === 0) {
         motivationTextElement.textContent = "Start your workout strong!";
-    } else if (completedCount > 0 && completedCount < totalExercises) {
-        motivationTextElement.textContent = `You're doing great! Keep pushing – ${totalExercises - completedCount} more to go!`;
-    } else if (completedCount === totalExercises) {
+    } else if (completedCount > 0 && completedCount < totalCompletableExercises) {
+        const remaining = totalCompletableExercises - completedCount;
+        motivationTextElement.textContent = `You're doing great! Keep pushing – ${remaining} more exercise${remaining > 1 ? 's' : ''} to go!`;
+    } else if (completedCount === totalCompletableExercises) {
         motivationTextElement.textContent = "Awesome work! You crushed it!";
     }
 }
 
 function checkAllWorkoutsCompleted() {
-    const totalExercises = (workoutData[currentDay]?.exercises?.length || 0) + (workoutData[currentDay]?.warmup ? 1 : 0);
+    const todayWorkout = workoutData[currentDay];
+    if (!todayWorkout || todayWorkout.exercises.length === 0) {
+        document.getElementById('completion-message').classList.add('hidden');
+        return;
+    }
+
+    const totalCompletableExercises = todayWorkout.exercises.length;
     const completedCount = Object.keys(completedExercises[currentDay] || {}).length;
     const completionMessage = document.getElementById('completion-message');
 
-    if (totalExercises > 0 && completedCount === totalExercises) {
+    if (totalCompletableExercises > 0 && completedCount === totalCompletableExercises) {
         completionMessage.classList.remove('hidden');
         setTimeout(() => {
             completionMessage.classList.add('hidden');
-        }, 3000); // Hide after 3 seconds
+        }, 3000);
     } else {
         completionMessage.classList.add('hidden');
     }
 }
 
-function resetCompletedIndividual() {
+function resetCompletedIndividual() { // Resets completed for *today*
     if (confirm("Are you sure you want to reset all completed exercises for today?")) {
-        completedExercises[currentDay] = {};
-        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-        loadWorkouts();
+        if (completedExercises[currentDay]) {
+            completedExercises[currentDay] = {};
+            localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+            loadWorkouts();
+        }
     }
 }
 
-// Function to show the custom confirmation modal
 function showRefreshConfirmModal() {
     document.getElementById('refreshConfirmModal').classList.remove('hidden');
 }
 
-// Function to hide the custom confirmation modal
 function hideRefreshConfirmModal() {
     document.getElementById('refreshConfirmModal').classList.add('hidden');
 }
 
-// Original refreshWorkouts function, now simplified to trigger the modal
-function refreshWorkouts() {
+function refreshWorkouts() { // This button now means reset ALL days
     showRefreshConfirmModal();
 }
 
-// Add event listeners for the Yes and No buttons in the modal
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing DOMContentLoaded code ...
-
-    document.getElementById('confirmRefreshYes').addEventListener('click', () => {
-        completedExercises = {}; // Clear ALL completed exercises
-        localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-        loadWorkouts();
-        hideRefreshConfirmModal(); // Hide the modal after confirmation
-    });
-
-    document.getElementById('confirmRefreshNo').addEventListener('click', () => {
-        hideRefreshConfirmModal(); // Just hide the modal if 'No' is clicked
-    });
-});
-
 function showHomePage() {
-    // In this static app, showHomePage just reloads the current day's workouts
+    currentDay = new Date().toLocaleString('en-US', { weekday: 'long' });
+    updateDayOfExercise();
     loadWorkouts();
 }
-let sliderExerciseId = null;
 
-function showSliderPopup(exerciseId) {
-  sliderExerciseId = exerciseId;
+function showSliderPopup(displayId, isSuperset = false, actualIds = []) {
+  sliderExerciseId = displayId; 
+  sliderIsSuperset = isSuperset;
+  sliderActualExerciseIds = actualIds; 
 
-  const card = document.getElementById(exerciseId);
+  const card = document.getElementById(displayId);
   const workoutName = card?.querySelector('.exercise-name')?.textContent || 'Workout';
   document.getElementById('sliderWorkoutName').textContent = workoutName;
 
   const slider = document.getElementById('completeSlider');
-  slider.value = 0;
+  slider.value = 0; // Reset slider position
 
   document.getElementById('sliderPopup').classList.remove('hidden');
 }
 
-const slider = document.getElementById('completeSlider');
-
-slider.addEventListener('change', function () {
-  if (this.value >= 100 && sliderExerciseId) {
-    if (!completedExercises[currentDay]) {
-      completedExercises[currentDay] = {};
-    }
-    completedExercises[currentDay][sliderExerciseId] = true;
-    localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
-    loadWorkouts();
-    updateMotivationText();
-    checkAllWorkoutsCompleted();
-    document.getElementById('sliderPopup').classList.add('hidden');
-  } else {
-    // Snap back if not completed
-    this.value = 0;
-  }
-});
+// Note: The slider's event listener is now placed inside DOMContentLoaded for better practice.
+// The global variables sliderExerciseId, sliderIsSuperset, sliderActualExerciseIds are defined outside functions.
