@@ -1,0 +1,135 @@
+# Weekly Push/Pull Workout Plan
+
+A **6-day split** designed for a 20-year-old (85 kg, 2 yrs experience) training at 6:00 AM for fat loss with strength retention and hypertrophy. This push–pull style program alternates muscle groups (push vs. pull) to optimize recovery and growth. It incorporates progressive overload and high weekly volume (≈10+ sets/muscle) while using supersets and finishers for time-efficient fat burn. Each day starts with a dynamic warm-up to raise heart rate and muscle temperature. Heavy compound **Strength** exercises come first, followed by **Normal Sets** and **Supersets** (paired exercises) for metabolic effect. At least **6 movements/day (incl. finisher)** are included. Training is partner-friendly: during supersets both partners work together, while on strength/normal sets partners alternate reps/rest or spotting.
+
+### Key Principles (with evidence)
+
+* **Push–Pull Split:** Training opposing muscles on separate days allows each group to recover (\~48–72 hrs) and can enable training all major muscles twice/week for maximal strength gains.
+* **Multi-Joint First:** Follow NSCA order: power lifts, then core multi-joint, then single-joint.  Do heavy compounds (squat, bench, pull-up, etc.) first for strength.
+* **Supersets for Efficiency:** Pair different muscle groups (agonist/antagonist) to **halve workout time** without losing volume. This boosts metabolic stress (lactate) and conditions the body.
+* **Progressive Overload:** Gradually increase weight or reps each week to continually challenge muscles. (Progressive overload is key: “gradual increase of stress”.)
+* **Mind–Muscle Connection:** Focus mentally on the target muscle during each rep. Studies show focusing on a specific muscle **increases its activation** (especially at moderate loads).
+* **Warm-Up:** 5–10 min dynamic warm-up before each session (light cardio, mobility) widens blood vessels and raises muscle temperature, improving performance and reducing injury risk.
+* **Finishers:** After strength work, add a short intense finisher (e.g. jump rope, battle ropes, burpees) to spike heart rate and fat burn. This enhances conditioning (VO₂max) and helps you handle higher workloads over time.
+
+## Day 1: Chest & Back
+
+**Warm-up (5–8 min):**
+
+* Jumping jacks or light jump rope – raise heart rate.
+* Arm circles and band pull-aparts – mobilize shoulders and scapula.
+* Push-ups (bodyweight, easy pace) – activate chest and triceps.
+* Cat–cow or thoracic rotations – loosen spine.
+
+**Workout Exercises:** Perform Strength and Normal sets alternately (one partner rests/spots). In Supersets both partners work simultaneously with minimal rest between the paired exercises.
+
+| Exercise                     | Type       | Sets × Reps            | Notes                                      |
+| ---------------------------- | ---------- | ---------------------- | ------------------------------------------ |
+| **Barbell Bench Press**      | Strength   | 4×5 (heavy)            | Heavy compound (start fresh); full range.  |
+| **Bent‑Over Barbell Row**    | Normal Set | 4×6–8 (heavy)          | Heavy back movement, alternate with bench. |
+| **Incline Dumbbell Press**   | Superset   | 3×8–10                 | Superset with Seated Cable Row (below).    |
+| **Seated Cable Row**         | Superset   | 3×8–10                 | Superset with Incline Press (above).       |
+| **Cable Fly (or Pec Deck)**  | Superset   | 3×12                   | Superset with Lat Pulldown (below).        |
+| **Lat Pulldown (wide grip)** | Superset   | 3×10                   | Superset with Cable Fly (above).           |
+| **Jump Rope Intervals**      | Finisher   | 5×(1 min on/1 min off) | High-intensity cardio blasts.              |
+
+* *Notes:* Use challenging weight on strength lifts. In supersets perform both movements back-to-back, then rest \~60–90s.  Adjust rep ranges if needed for form.
+
+## Day 2: Arms (Biceps & Triceps)
+
+**Warm-up (5 min):**
+
+* Light band curls and band triceps pushdowns – wake up biceps/triceps.
+* Wrist circles and overhead arm swings – mobilize elbows and shoulders.
+* Push-ups or dips (bodyweight) – pre-activate triceps.
+
+**Workout Exercises:** Smaller muscle focus with supersets.
+
+| Exercise                           | Type     | Sets × Reps | Notes                                  |
+| ---------------------------------- | -------- | ----------- | -------------------------------------- |
+| **Weighted Dips (parallel bars)**  | Strength | 4×5 (heavy) | Heavy triceps compound (add weight).   |
+| **EZ-Bar Biceps Curl**             | Superset | 3×8–10      | Superset with Cable Triceps Pressdown. |
+| **Cable Triceps Pressdown**        | Superset | 3×10        | Superset with EZ-Bar Curl.             |
+| **Dumbbell Hammer Curl**           | Superset | 3×10–12     | Superset with Overhead Triceps Ext.    |
+| **Overhead Dumbbell Triceps Ext.** | Superset | 3×10–12     | Superset with Hammer Curl.             |
+| **Diamond Push-Ups (Bodyweight)**  | Finisher | 2×AMRAP     | To failure: high-rep tri/biceps burn.  |
+
+* *Notes:* In each superset, one partner curls while the other does pushdowns, then swap after rest.  Use challenging loads for 8–12 reps. Diamond push-ups use body weight to fully fatigue the arms and torch calories.
+
+## Day 3: Shoulders (Delts & Traps)
+
+**Warm-up (5–8 min):**
+
+* Scapular band pull-aparts and YTWLs – warm up shoulder blade musculature.
+* Arm swings and shoulder dislocations with band – increase shoulder mobility.
+* Light dumbbell shoulder press (very light) – prime delts.
+
+**Workout Exercises:**
+
+| Exercise                           | Type     | Sets × Reps        | Notes                              |
+| ---------------------------------- | -------- | ------------------ | ---------------------------------- |
+| **Barbell Overhead Press**         | Strength | 4×6 (heavy)        | Heavy shoulder press (no Arnold).  |
+| **Dumbbell Lateral Raise**         | Superset | 3×12               | Superset with Face Pull.           |
+| **Face Pull (cable or band)**      | Superset | 3×12               | Superset with Lateral Raise.       |
+| **Dumbbell Front Raise**           | Superset | 3×12               | Superset with Reverse Fly.         |
+| **Reverse Delt Fly (cable or DB)** | Superset | 3×12               | Superset with Front Raise.         |
+| **Battle Rope Waves**              | Finisher | 5×(30s on/30s off) | Max-intensity shoulder/core drill. |
+
+* *Notes:* Start heavy overhead (use power rack safety). In supersets, use moderate weight (10–15 RM) to maintain tension. Battle rope waves (alternating arms) blast shoulders and heart rate for 5 minutes total.
+
+## Day 4: Core & HIIT
+
+**Warm-up (5 min):**
+
+* Light jog or jumping rope – elevate HR.
+* Cat–Cow and torso rotations – mobilize spine.
+* Hip flexor lunges – prepare core and hips.
+
+**Workout Exercises:** Build core endurance, then high-intensity intervals.
+
+| Exercise                             | Type        | Sets × Reps             | Notes                               |
+| ------------------------------------ | ----------- | ----------------------- | ----------------------------------- |
+| **Plank (forearms)**                 | Normal Set  | 3×30 sec holds          | Keep tight core and glutes.         |
+| **Hanging Leg Raises**               | Normal Set  | 3×10–12                 | Full hip flexion; control motion.   |
+| **Russian Twists (wgt)**             | Normal Set  | 3×20 (10 each side)     | Torso rotation for obliques.        |
+| **Back Extension**                   | Normal Set  | 3×12–15                 | (Swiss ball or bench) for low back. |
+| **Bicycle Crunch**                   | Normal Set  | 3×20 (10 each side)     | Controlled, continuous motion.      |
+| **HIIT Sprints (treadmill or bike)** | HIIT/Cardio | 5×(30s sprint/90s rest) | “All-out” effort intervals.         |
+
+* *Notes:* Perform core exercises circuit-style if desired (minimal rest). After core, do 5 rounds of 30 s sprints (or high-resistance bike) with 1.5 min rest. This HIIT finisher boosts conditioning without impacting strength gains.
+
+## Day 5: Long Cardio Session
+
+**Warm-up (10 min):** Easy jogging or fast walking, plus leg swings and lunges.
+
+| Exercise                | Type        | Duration      | Notes                                                                                        |
+| ----------------------- | ----------- | ------------- | -------------------------------------------------------------------------------------------- |
+| **Light Jog (warm-up)** | Warm-Up     | 10 min        | Easy pace to elevate heart rate.                                                             |
+| **Steady-State Run**    | LISS Cardio | 2:00–2:30 hrs | Moderate intensity (Zone 2) for fat burn. Maintain conversational pace to maximize duration. |
+
+* *Notes:* Keep a steady moderate pace to burn fat and build endurance. Hydrate and wear proper shoes. No finisher needed (this is the main cardio challenge). Schedule this on cooler day or use treadmill if needed.
+
+## Day 6: Legs (Quads, Hamstrings, Glutes)
+
+**Warm-up (5–8 min):**
+
+* Bodyweight squats and lunges – prime hips/legs.
+* Leg swings (front-to-back, side-to-side) – mobilize hips.
+* Hip circles and glute bridges – awaken glutes and core.
+
+**Workout Exercises:**
+
+| Exercise                  | Type       | Sets × Reps            | Notes                                                 |
+| ------------------------- | ---------- | ---------------------- | ----------------------------------------------------- |
+| **Back Squat**            | Strength   | 4×5 (heavy)            | Heavy compound (use safety bars/spots).               |
+| **Romanian Deadlift**     | Normal Set | 3×8 (moderate)         | Emphasize hamstrings/glutes, slight knee bend.        |
+| **Leg Press (feet mid)**  | Superset   | 3×12                   | Superset with Seated Leg Curl.                        |
+| **Seated Leg Curl**       | Superset   | 3×12                   | Superset with Leg Press.                              |
+| **Bulgarian Split Squat** | Normal Set | 3×10 each leg          | Free-weight single-leg, full depth.                   |
+| **Jump Rope**             | Finisher   | 5×(1 min on/1 min off) | Max effort for fat burn (alternatively burpees 3×10). |
+
+* *Notes:* Prioritize form on squats (depth, neutral spine). Alternate sets of leg press and leg curl with partner. Finish legs with 5 minutes of jump-rope intervals to spike heart rate and burn extra fat.
+
+## Day 7: **Rest Day**
+
+Fully rest and recover. Stretch lightly or do gentle mobility work if desired. Good sleep and nutrition help retain strength and support fat loss.
